@@ -11,6 +11,16 @@ services:
       LLAMA_CPP_SERVER_URL: ${LLAMA_CPP_SERVER_URL:-http://192.168.10.140:8080/v1/chat/completions}
       LLAMA_CPP_SERVER_MODEL: ${LLAMA_CPP_SERVER_MODEL:-}
       LLAMA_CPP_SERVER_TIMEOUT: ${LLAMA_CPP_SERVER_TIMEOUT:-90}
+      MAX_INPUT_CHARS: ${MAX_INPUT_CHARS:-200000}
+      MCP_API_TOKEN: ${MCP_API_TOKEN:?MCP_API_TOKEN must be set in .env}
     ports:
       - "${FASTMCP_PORT:-8000}:8000"
     restart: unless-stopped
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 100
