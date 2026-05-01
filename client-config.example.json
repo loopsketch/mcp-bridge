@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "/home/user/works/mcp-bridge": {
+      "mcpServers": {
+        "local-agent-helper": {
+          "type": "http",
+          "url": "http://localhost:8000/mcp"
+        }
+      }
+    }
+  }
+}

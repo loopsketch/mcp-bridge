@@ -1,0 +1,16 @@
+services:
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mcp-server
+    environment:
+      MCP_TRANSPORT: ${MCP_TRANSPORT:-streamable-http}
+      FASTMCP_HOST: ${FASTMCP_HOST:-0.0.0.0}
+      FASTMCP_PORT: ${FASTMCP_PORT:-8000}
+      LLAMA_CPP_SERVER_URL: ${LLAMA_CPP_SERVER_URL:-http://192.168.10.140:8080/v1/chat/completions}
+      LLAMA_CPP_SERVER_MODEL: ${LLAMA_CPP_SERVER_MODEL:-}
+      LLAMA_CPP_SERVER_TIMEOUT: ${LLAMA_CPP_SERVER_TIMEOUT:-90}
+    ports:
+      - "${FASTMCP_PORT:-8000}:8000"
+    restart: unless-stopped
